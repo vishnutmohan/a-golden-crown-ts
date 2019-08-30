@@ -1,6 +1,6 @@
 /**
  * Class for Ruler of Southeros
- * 2 params
+ * 2 params 
  * @param {string} _ruler : assign who is the ruler
  * @param {Array} _allies : allies of the ruler
  * 2 methods and 2 get methods to return class variables
@@ -9,7 +9,8 @@
 import { Kingdom } from './kingdom';
 import { IRulerOfSoutheros } from './interface/IRulerOfSoutheros';
 
-export class RulerOfSoutheros {
+export class RulerOfSoutheros implements IRulerOfSoutheros {
+
     /**
      * Initialize class parameters
      */
@@ -20,7 +21,7 @@ export class RulerOfSoutheros {
      * Constructor function
      */
     constructor() {
-        this._ruler = 'None';
+        this._ruler = "None";
         this._allies = [];
     }
 
@@ -33,11 +34,12 @@ export class RulerOfSoutheros {
     }
 
     /**
-     * Get method for ruler
+     * Get method for ruler  
      * Return the ruler param of class as King Shan if 3 or more allies present
      */
     public get ruler(): string {
-        if (this._allies.length >= 3) this._ruler = 'King Shan';
+        if (this._allies.length >= 3)
+            this._ruler = "King Shan";
         return this._ruler;
     }
 
@@ -46,31 +48,15 @@ export class RulerOfSoutheros {
      * @param {string } message : message to pass to kingdom to verify ally
      * Return type is void
      */
-    // public findKingdomIsAlly(message: string): void {
-    //     let inputArray: string[] = [];
-    //     if (message.length > 0) {
-    //         message.split(',').forEach(element => {
-    //             inputArray.push(element.replace(/\"/g, "").trim());
-    //         });
-    //         let kingdom = new Kingdom(inputArray[0].toLowerCase());
-    //         if ((this._allies.indexOf(inputArray[0]) === -1) && (kingdom.decryptMessage(inputArray[1].toLowerCase())))
-    //             this._allies.push(inputArray[0]);
-    //     }
-    // }
-
-    public findKingdomIsAlly(arg1: string, arg2: string): void {
+    public findKingdomIsAlly(message: string): void {
         let inputArray: string[] = [];
-        if (arg2.length > 0) {
-            arg2.replace(/\"/g, '').trim();
-            // message.split(',').forEach(element => {
-            //     inputArray.push(element.replace(/\"/g, "").trim());
-            // });
-            let kingdom = new Kingdom(arg1.toLowerCase());
-            if (
-                this._allies.indexOf(arg1) === -1 &&
-                kingdom.decryptMessage(arg2.toLowerCase())
-            )
-                this._allies.push(arg1);
+        if (message.length > 0) {
+            message.split(',').forEach(element => {
+                inputArray.push(element.replace(/\"/g, "").trim());
+            });
+            let kingdom = new Kingdom(inputArray[0].toLowerCase());
+            if ((this._allies.indexOf(inputArray[0]) === -1) && (kingdom.decryptMessage(inputArray[1].toLowerCase())))
+                this._allies.push(inputArray[0]);
         }
     }
 }
